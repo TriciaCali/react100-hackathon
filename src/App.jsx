@@ -27,6 +27,7 @@ class App extends Component {
 
 componentWillMount() {
         /* let quote = {}; */
+        console.log(process.env.REACT_APP_APIKEY)
         //start of temporary api replacement
         let quote =''
 
