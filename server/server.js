@@ -16,7 +16,7 @@ app.get("/quotes", (req,res) => {
     url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
     headers: {
       'content-type': 'application/json',
-      'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+      'X-RapidAPI-Key': process.env.APIKEY,
       'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
     },
     data: '{"key1":"value","key2":"value"}'
@@ -32,7 +32,7 @@ app.get("/exercises", (req,res) => {
     method: 'GET',
     url: 'https://exercisedb.p.rapidapi.com/exercises/equipment/body%20weight',
    headers: {
-       'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+       'X-RapidAPI-Key': process.env.APIKEY,
        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
    }
    };
