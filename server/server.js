@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const axios = require('axios');
+require('dotenv').config();
 
 const app = express();
 
@@ -9,36 +10,35 @@ app.use(express.static('dist'));
 app.use(express.static('public'));
 app.use(express.json());
 
-/* app.get('/api', (req, res) => {
-    axios.get(`https://bodybuilding-quotes1.p.rapidapi.com/random-quote`)
-        .then((result) => {
-            res.send(result.data);
-        })
-        .catch((error) => {
-            console.error(error);
-            res.send('An error occured.');
-        })
-});
- */
+app.get("/quotes", (req,res) => {
+  const options = {
+    method: 'POST',
+    url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
+    headers: {
+      'content-type': 'application/json',
+      'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+      'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
+    },
+    data: '{"key1":"value","key2":"value"}'
+  };
+  
+  axios.request(options).then(quoteData => {
+    res.send(quoteData.data)
+})
+})
 
-/* 
- const options = {
-  method: 'GET',
-  url: 'https://bodybuilding-quotes1.p.rapidapi.com/random-quote',
-  headers: {
-    'X-RapidAPI-Key': '72e066e49emshcd1e7705cf8de7dp16e555jsnc11b8f72aed2',
-    'X-RapidAPI-Host': 'bodybuilding-quotes1.p.rapidapi.com'
-  }
-};
-  */
+app.get("/exercises", (req,res) => {
+  const options2 = {
+    method: 'GET',
+    url: 'https://exercisedb.p.rapidapi.com/exercises/equipment/body%20weight',
+   headers: {
+       'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+       'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+   }
+   };
 
-/* 
- axios.request(options).then(function(response){
-    const quoteData = response.data;
-    console.log(quoteData);
-
-}).catch(function (error) {
-	console.error(error);
-});  */
- 
+    axios.request(options2).then(exercisesData => {
+        res.send(exercisesData.data)
+})
+})
 module.exports = app;

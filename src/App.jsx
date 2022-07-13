@@ -12,12 +12,7 @@ class App extends Component {
                 author:''
             }, */
             quote:'',
-            exercises: [
-                0: { name:'',
-                    gifUrl: '',
-                    },
-
-            ],
+            exercises: [],
             clickNewWorkout: false,
         };
         //bind fx here 
@@ -26,64 +21,14 @@ class App extends Component {
     //add new fxs here 
 
 componentWillMount() {
-        /* let quote = {}; */
-        console.log(process.env.TEST)
-        //start of temporary api replacement
-        let quote =''
 
-const options = {
-    method: 'POST',
-    url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
-    headers: {
-      'content-type': 'application/json',
-      'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
-      'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
-    },
-    data: '{"key1":"value","key2":"value"}'
-  };
-  
-  axios.request(options).then(quoteData => {
-    quote = quoteData.data
-    this.setState({ quote })});
-; 
-
-
-//end of temporary in api replacement
-
-
-
-      //  workiing start for quote api
-       /*  const options = {
-            method: 'GET',
-            url: 'https://bodybuilding-quotes1.p.rapidapi.com/random-quote',
-            headers: {
-              'X-RapidAPI-Key': '72e066e49emshcd1e7705cf8de7dp16e555jsnc11b8f72aed2',
-              'X-RapidAPI-Host': 'bodybuilding-quotes1.p.rapidapi.com'
-            }
-          };
-    axios.request(options).then(quoteData => {
-        quote = quoteData.data
+    axios.get('/quotes').then(quoteData => {
+        let quote = quoteData.data
         this.setState({ quote })});
-    ;  */
-    //working end for  quote api
- 
-            //start of working exercise api
 
-
-  const options2 = {
-    method: 'GET',
-    url: 'https://exercisedb.p.rapidapi.com/exercises/equipment/body%20weight',
-   headers: {
-       'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
-       'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-   }
-   };
-
-    axios.request(options2).then(exercises => {
-        exercises = exercises.data;
+    axios.request('/exercises').then(exercisesData => {
+        let exercises = exercisesData.data;
         this.setState({ exercises })});
-
-//working end of exercise api
 
 } 
 
