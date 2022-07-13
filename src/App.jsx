@@ -26,7 +26,7 @@ componentWillMount() {
         let quote = quoteData.data
         this.setState({ quote })});
 
-    axios.request('/exercises').then(exercisesData => {
+    axios.get('/exercises').then(exercisesData => {
         let exercises = exercisesData.data;
         this.setState({ exercises })});
 
